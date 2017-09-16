@@ -2,6 +2,8 @@ package game;
 
 import components.Camera;
 import components.DirectionalLight;
+import components.FreeLook;
+import components.FreeMove;
 import components.MeshRenderer;
 import components.PointLight;
 import components.SpotLight;
@@ -86,7 +88,7 @@ public class TestGame extends Game
 	
 		GameObject testMesh1 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
 		GameObject testMesh2 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
-		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
+		GameObject testMesh3 = new GameObject().addComponent(new LookAtComponent()).addComponent(new MeshRenderer(tempMesh, material));
 
 		
 		testMesh1.getTransform().getPos().set(0, 2, 0);
@@ -95,9 +97,9 @@ public class TestGame extends Game
 		testMesh2.getTransform().getPos().set(0, 0, 5);
 		
 		testMesh1.addChild(testMesh2);
-		testMesh2
+		testMesh2.addChild(
 		//getRootObject()
-				 .addChild(new GameObject().addComponent(new Camera((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getHeight(),0.01f,1000.0f)));
+				 new GameObject().addComponent(new FreeLook(0.5f)).addComponent(new FreeMove(10.0f)).addComponent(new Camera((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getHeight(),0.01f,1000.0f)));
 	
 		addObject(testMesh1);
 		addObject(testMesh3);

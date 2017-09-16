@@ -17,12 +17,12 @@ public class Vector3f
 	{
 		return (float)Math.sqrt(x * x + y * y + z * z);
 	}
-	
+
 	public float max()
 	{
 		return Math.max(x, Math.max(y, z));
 	}
-	
+
 	public float dot(Vector3f r)
 	{
 		return x * r.getX() + y * r.getY() + z * r.getZ();
@@ -43,8 +43,8 @@ public class Vector3f
 		
 		return new Vector3f(x / length, y / length, z / length);
 	}
-	
-	public Vector3f rotate( Vector3f axis, float angle)
+
+	public Vector3f rotate(Vector3f axis, float angle)
 	{
 		float sinAngle = (float)Math.sin(-angle);
 		float cosAngle = (float)Math.cos(-angle);
@@ -52,22 +52,22 @@ public class Vector3f
 		return this.cross(axis.mul(sinAngle)).add(           //Rotation on local X
 				(this.mul(cosAngle)).add(                     //Rotation on local Z
 						axis.mul(this.dot(axis.mul(1 - cosAngle))))); //Rotation on local Y
-
 	}
-	
+
 	public Vector3f rotate(Quaternion rotation)
 	{
 		Quaternion conjugate = rotation.conjugate();
-		
+
 		Quaternion w = rotation.mul(this).mul(conjugate);
-		
+
 		return new Vector3f(w.getX(), w.getY(), w.getZ());
 	}
-	
+
 	public Vector3f lerp(Vector3f dest, float lerpFactor)
 	{
 		return dest.sub(this).mul(lerpFactor).add(this);
 	}
+
 	public Vector3f add(Vector3f r)
 	{
 		return new Vector3f(x + r.getX(), y + r.getY(), z + r.getZ());
@@ -115,28 +115,20 @@ public class Vector3f
 	
 	public String toString()
 	{
-		return "(" + x + ' ' + y + ' ' + z + ')';
+		return "(" + x + " " + y + " " + z + ")";
 	}
-	
-	public Vector2f getXY(){return new Vector2f (x,y);}
-	public Vector2f getYZ(){return new Vector2f (y,z);}
-	public Vector2f getZX(){return new Vector2f (z,x);}
-	
-	public Vector2f getYX(){return new Vector2f (y,x);}
-	public Vector2f getZY(){return new Vector2f (z,y);}
-	public Vector2f getXZ(){return new Vector2f (x,z);}
-	
-	
-	public Vector3f set(float x, float y, float z)
-	{
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		return this;
-	}
-	
-	public Vector3f set(Vector3f r){ set(r.getX(),r.getY(),r.getZ());return this;}
-	
+
+	public Vector2f getXY() { return new Vector2f(x, y); }
+	public Vector2f getYZ() { return new Vector2f(y, z); }
+	public Vector2f getZX() { return new Vector2f(z, x); }
+
+	public Vector2f getYX() { return new Vector2f(y, x); }
+	public Vector2f getZY() { return new Vector2f(z, y); }
+	public Vector2f getXZ() { return new Vector2f(x, z); }
+
+	public Vector3f set(float x, float y, float z) { this.x = x; this.y = y; this.z = z; return this; }
+	public Vector3f set(Vector3f r) { set(r.getX(), r.getY(), r.getZ()); return this; }
+
 	public float getX() 
 	{
 		return x;
@@ -166,7 +158,7 @@ public class Vector3f
 	{
 		this.z = z;
 	}
-	
+
 	public boolean equals(Vector3f r)
 	{
 		return x == r.getX() && y == r.getY() && z == r.getZ();

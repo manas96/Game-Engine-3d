@@ -15,11 +15,12 @@ public class Vector2f
 	{
 		return (float)Math.sqrt(x * x + y * y);
 	}
+
 	public float max()
 	{
 		return Math.max(x, y);
 	}
-	
+
 	public float dot(Vector2f r)
 	{
 		return x * r.getX() + y * r.getY();
@@ -31,17 +32,17 @@ public class Vector2f
 		
 		return new Vector2f(x / length, y / length);
 	}
-	
+
 	public float cross(Vector2f r)
 	{
 		return x * r.getY() - y * r.getX();
 	}
-	
+
 	public Vector2f lerp(Vector2f dest, float lerpFactor)
 	{
 		return dest.sub(this).mul(lerpFactor).add(this);
 	}
-	
+
 	public Vector2f rotate(float angle)
 	{
 		double rad = Math.toRadians(angle);
@@ -100,16 +101,10 @@ public class Vector2f
 	{
 		return "(" + x + " " + y + ")";
 	}
-	
-	public Vector2f set(float x, float y)
-	{
-		this.x = x;
-		this.y = y;
-		return this;
-	}
-	
-	public Vector2f set(Vector3f r){ set(r.getX(),r.getY());return this;}
-	
+
+	public Vector2f set(float x, float y) { this.x = x; this.y = y; return this; }
+	public Vector2f set(Vector2f r) { set(r.getX(), r.getY()); return this; }
+
 	public float getX() 
 	{
 		return x;
@@ -129,7 +124,7 @@ public class Vector2f
 	{
 		this.y = y;
 	}
-	
+
 	public boolean equals(Vector2f r)
 	{
 		return x == r.getX() && y == r.getY();
